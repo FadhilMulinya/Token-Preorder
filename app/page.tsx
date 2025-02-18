@@ -5,6 +5,7 @@ import {
   useWeb3ModalAccount,
 } from "@web3modal/ethers/react";
 import { BrowserProvider } from "ethers";
+import Image from "next/image";
 
 export default function Home() {
   // Form state
@@ -39,13 +40,21 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simple form submission logging
-    console.log({
-      fullName,
-      email,
-      investmentAmount,
-      walletAddress
-    });
+  
+    const formData = { fullName, email, walletAddress, investmentAmount };
+  
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+  
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
 
   const handleWalletInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,10 +136,12 @@ export default function Home() {
         </form>
 
         <div className="mt-8 flex justify-center">
-          <img 
+          <Image 
             src="/image.png" 
             alt="System Alert: Xylon is under construction" 
-            className="max-w-full h-auto rounded-lg shadow-lg"
+            className="max-w-full h-auto rounded-lg shadow-lg object-cover"
+            width={500}
+            height={500}
           />
         </div>
       </div>
