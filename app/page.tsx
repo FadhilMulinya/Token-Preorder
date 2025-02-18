@@ -137,7 +137,7 @@ export default function Home() {
 
         <div className="mt-8 flex justify-center">
           <Image 
-            src="/image.png" 
+            src="/xyl.png" 
             alt="System Alert: Xylon is under construction" 
             className="max-w-full h-auto rounded-lg shadow-lg object-cover"
             width={500}
