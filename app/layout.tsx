@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   title: "XYL Token Pre-Order Registration",
   description: "Pre-order registration page for XYL Token",
   icons: {
-    icon: "/fav.png",
+    icon: "/xyl.png",
     apple: [
-      { url: "/fav.png" },
+      { url: "/xyl.png" },
     ],
   },
 };

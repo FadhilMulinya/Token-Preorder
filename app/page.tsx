@@ -40,20 +40,29 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-    const formData = { fullName, email, walletAddress, investmentAmount };
-  
+
     try {
       const response = await fetch("/api/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          fullName,
+          email,
+          walletAddress,
+          investmentAmount,
+        }),
       });
-  
-      const data = await response.json();
-      alert(data.message);
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(`✅ ${result.message}`);
+      } else {
+        alert(`❌ ${result.message || "Failed to save submission."}`);
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
+      alert("❌ Failed to submit the form.");
     }
   };
 
@@ -65,7 +74,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center bg-white p-4">
       <div className="w-full max-w-md">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-black">XYL Token Pre-Order Registration</h1>
+          <h1 className="text-2xl font-bold text-black">
+            XYL Token Pre-Order Registration
+          </h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -136,9 +147,9 @@ export default function Home() {
         </form>
 
         <div className="mt-8 flex justify-center">
-          <Image 
-            src="/xyl.png" 
-            alt="System Alert: Xylon is under construction" 
+          <Image
+            src="/xyl.png"
+            alt="System Alert: Xylon is under construction"
             className="max-w-full h-auto rounded-lg shadow-lg object-cover"
             width={500}
             height={500}
@@ -148,12 +159,12 @@ export default function Home() {
 
       <style jsx global>{`
         .w3m-button-container {
-          --w3m-button-height: 32px;  /* Default is 40px */
+          --w3m-button-height: 32px; /* Default is 40px */
           --w3m-button-width: auto;
           --w3m-button-border-radius: 6px;
           --w3m-accent-color: #000000;
-          --w3m-accent-fill-color: #FFFFFF;
-          transform: scale(0.9);  /* Makes the button 90% of its original size */
+          --w3m-accent-fill-color: #ffffff;
+          transform: scale(0.9); /* Makes the button 90% of its original size */
         }
       `}</style>
     </main>
