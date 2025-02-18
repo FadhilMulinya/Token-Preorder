@@ -73,6 +73,45 @@ The app will be available at [http://localhost:3000](http://localhost:3000)
    - Receive confirmation of your registration
 
 ---
+## How to Set Up MongoDB
+
+This project uses MongoDB to store form submissions. Follow the steps below to set up MongoDB for this repository.
+
+### 1. Create a MongoDB Atlas Database
+MongoDB Atlas is a cloud-based database service. To set it up:
+
+- Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- Sign up or log in
+- Create a new **Cluster**
+- Choose a **Shared Cluster (Free Tier)**
+- Select a cloud provider and region
+- Click **Create Cluster** and wait for deployment
+
+### 2. Get the Connection String
+Once the cluster is ready:
+
+- Navigate to **Database Deployments**
+- Click **Connect** → **Drivers**
+- Select **Node.js** and **Version 4.0 or later**
+- Copy the **Connection String**, which will look like this:
+
+```bash
+mongodb+srv://<username>:<password>@cluster0.mongodb.net/?retryWrites=true&w=majority
+```
+- Replace `<username>` and `<password>` with your database credentials.
+
+### 3. Configure Environment Variables
+In the root directory, create or update your `.env.local` file:
+
+```env
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/xyl-token?retryWrites=true&w=majority
+MONGODB_DB=xyl-token
+```
+- Replace <username> and <password> with your actual MongoDB credentials.
+
+With that done, you can now read and write data to your new MongoDB cluster.
+
+---
 
 ## Technical Stack
 
